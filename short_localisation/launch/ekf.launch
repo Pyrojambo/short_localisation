@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <node pkg="robot_localization" type="ekf_localization_node" name="odom_fusion">
+        <rosparam command="load" file="$(find short_localisation)/config/ekf.yaml" />
+    </node>
+</launch>
