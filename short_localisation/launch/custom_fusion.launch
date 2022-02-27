@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <node pkg="short_localisation" type="localisation_node" name="custom_localisation">
+    </node>
+</launch>

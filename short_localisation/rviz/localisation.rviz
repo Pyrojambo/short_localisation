@@ -7,7 +7,6 @@ Panels:
         - /ground_truth1/Shape1
         - /wheel_odom1/Shape1
         - /gnss_odom1/Shape1
-        - /fused_odom1
         - /fused_odom1/Shape1
         - /test_fused_odom1
         - /test_fused_odom1/Shape1
@@ -176,7 +175,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: false
-      Enabled: true
+      Enabled: false
       Keep: 100
       Name: fused_odom
       Position Tolerance: 0.10000000149011612
@@ -192,7 +191,7 @@ Visualization Manager:
         Value: Arrow
       Topic: /config_odom
       Unreliable: false
-      Value: true
+      Value: false
     - Angle Tolerance: 0.10000000149011612
       Class: rviz/Odometry
       Covariance:
@@ -209,7 +208,7 @@ Visualization Manager:
           Color: 204; 51; 204
           Scale: 1
           Value: true
-        Value: true
+        Value: false
       Enabled: true
       Keep: 100
       Name: test_fused_odom
@@ -224,7 +223,7 @@ Visualization Manager:
         Shaft Length: 1
         Shaft Radius: 0.05000000074505806
         Value: Arrow
-      Topic: /ukf_config_odom
+      Topic: /fused_odom
       Unreliable: false
       Value: true
     - Class: rviz/TF
@@ -232,8 +231,6 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        base_link:
-          Value: true
         map:
           Value: true
         odom:
@@ -246,8 +243,7 @@ Visualization Manager:
       Tree:
         map:
           odom:
-            base_link:
-              {}
+            {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -278,7 +274,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10.483142852783203
+      Distance: 23.17489242553711
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1

@@ -34,7 +34,23 @@ The same configuration was used for the ukf for parameters that appeared in both
 
 Run
 `roslaunch short_localisation robot_localisation.launch`
+then press space to start `.bag` file
 
 # Method 2:
 
-Implement own version
+Implement own version of localisation
+
+## Run
+
+Run
+`roslaunch short_localisation custom_localisation.launch`
+then press space to start `.bag` file
+
+## Process
+
+### Step 1
+
+- Create a framework for subscribing to the ROS msgs and publishing the fused output and the `base_link` tf frame
+- Use a naive approach of averaging the positions to test the framework
+
+
