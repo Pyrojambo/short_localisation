@@ -58,8 +58,10 @@ nav_msgs::Odometry OdometryFusion::encoderOdomChange() {
       const double delta_yaw{encoder_odom->twist.twist.angular.z * delta_t};
       current_yaw += delta_yaw;
 
-      std::cout << "Encoder step change: (" << delta_x << ", " << delta_y
-                << ", " << delta_yaw << ") for " << delta_t << "s" << std::endl;
+      //      std::cout << "Encoder step change: (" << delta_x << ", " <<
+      //      delta_y
+      //                << ", " << delta_yaw << ") for " << delta_t << "s" <<
+      //                std::endl;
     }
     encoder_odom_deque_.clear();
 
@@ -69,15 +71,16 @@ nav_msgs::Odometry OdometryFusion::encoderOdomChange() {
 
     encoderChange.header.stamp = ros::Time(last_time);
 
-    std::cout << "Encoder change: ("
-              << (encoderChange.pose.pose.position.x -
-                  fused_odom_.pose.pose.position.x)
-              << ", "
-              << (encoderChange.pose.pose.position.y -
-                  fused_odom_.pose.pose.position.y)
-              << ", "
-              << (current_yaw - tf2::getYaw(fused_odom_.pose.pose.orientation))
-              << ")" << std::endl;
+    //    std::cout << "Encoder change: ("
+    //              << (encoderChange.pose.pose.position.x -
+    //                  fused_odom_.pose.pose.position.x)
+    //              << ", "
+    //              << (encoderChange.pose.pose.position.y -
+    //                  fused_odom_.pose.pose.position.y)
+    //              << ", "
+    //              << (current_yaw -
+    //              tf2::getYaw(fused_odom_.pose.pose.orientation))
+    //              << ")" << std::endl;
   }
 
   return encoderChange;

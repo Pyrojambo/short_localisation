@@ -10,6 +10,7 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
   robot_localization
   roscpp
+  roslib
 )
 
 ## System dependencies are found with CMake's conventions
@@ -137,6 +138,9 @@ add_executable(localisation_node src/localisation_node.cpp)
 add_dependencies(localisation_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(localisation_node ${catkin_LIBRARIES} odometry_fusion)
 
+add_executable(error_recorder src/error_recorder.cpp src/csv_helper.cpp)
+add_dependencies(error_recorder ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(error_recorder ${catkin_LIBRARIES} )
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
