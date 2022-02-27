@@ -10,6 +10,17 @@ LocalisationNode::LocalisationNode() {
 }
 
 void LocalisationNode::fuseOdometry() {
+  nav_msgs::OdometryConstPtr initial_odom_ptr =
+      ros::topic::waitForMessage<nav_msgs::Odometry>(gnss_odom_sub_.getTopic(),
+                                                     ros::Duration{10});
+  if (initial_odom_ptr == nullptr) {
+    ROS_ERROR("Failed to get initial odometry from %s. Aborting",
+              gnss_odom_sub_.getTopic().c_str());
+    return;
+  }
+  
+  odom_fuser.setInitialOdom(initial_odom_ptr);
+  
   ros::Rate loop_rate{50};
 
   while (nh_.ok()) {
@@ -38,7 +49,7 @@ void LocalisationNode::publish(const nav_msgs::Odometry &odom) {
 
   geometry_msgs::TransformStamped odom_to_base_tf;
   odom_to_base_tf.header.stamp = odom.header.stamp;
-  odom_to_base_tf.header.frame_id = "odom";
+  odom_to_base_tf.header.frame_id = "map";
   odom_to_base_tf.child_frame_id = "base_link";
   odom_to_base_tf.transform.translation.x = odom.pose.pose.position.x;
   odom_to_base_tf.transform.translation.y = odom.pose.pose.position.y;
@@ -54,7 +65,7 @@ void LocalisationNode::encoderOdomCb(const nav_msgs::OdometryConstPtr &odom) {
 
 void LocalisationNode::gnssOdomCb(const nav_msgs::OdometryConstPtr &odom) {
   odom_fuser.forwardGnssOdom(odom);
-  
+
   // gnss is the slower input source so use that as the output trigger
   nav_msgs::Odometry fused_odom{odom_fuser.getFusedOdom()};
   publish(fused_odom);

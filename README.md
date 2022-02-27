@@ -52,5 +52,6 @@ then press space to start `.bag` file
 
 - Create a framework for subscribing to the ROS msgs and publishing the fused output and the `base_link` tf frame
 - Use a naive approach of averaging the positions to test the framework
+- Extend the naive approach to use encoder velocities instead of pose
 
 
