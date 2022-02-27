@@ -13,7 +13,7 @@ and source workspace
 
 # Method 1:
 
-Use the extended Kalman filter (ekf) from [robot_localization](http://wiki.ros.org/robot_localization)
+Use the extended Kalman filter (ekf) and unscented Kalman filter (ukf) from [robot_localization](http://wiki.ros.org/robot_localization)
 
 ## Configuration
 
@@ -28,13 +28,12 @@ The parameters(short_localisation/config/ekf.yaml) for using robot_localisation 
     - Used the linear x and y positions
     - pose outlier rejection was disabled so that our initial position would not be ignored
 
+The same configuration was used for the ukf for parameters that appeared in both
+
 ## Run
 
 Run
-`roslaunch short_localisation odom_bag.launch`
-in one terminal and 
-`roslaunch short_localisation ekf.launch`
-in a second terminal
+`roslaunch short_localisation robot_localisation.launch`
 
 # Method 2:
 

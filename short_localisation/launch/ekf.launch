@@ -2,5 +2,11 @@
 <launch>
     <node pkg="robot_localization" type="ekf_localization_node" name="odom_fusion">
         <rosparam command="load" file="$(find short_localisation)/config/ekf.yaml" />
+        <remap from="odometry/filtered" to="config_odom"/>
+    </node>
+    
+    <node pkg="robot_localization" type="ukf_localization_node" name="ukf_odom_fusion">
+        <rosparam command="load" file="$(find short_localisation)/config/ukf.yaml" />
+        <remap from="odometry/filtered" to="ukf_config_odom"/>
     </node>
 </launch>
