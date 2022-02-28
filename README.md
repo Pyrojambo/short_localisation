@@ -14,6 +14,7 @@ and source workspace
 # Method 1:
 
 I have used the extended Kalman filter (ekf) from [robot_localization](http://wiki.ros.org/robot_localization) before and know it was designed for exactly this task so initially spent some time using it to see what its estimate would be.
+Also briefly tested the Unscented Kalman filter (ukf) but this performed much worse than the ekf and ekf is the recommended one to use in the majority of ROS use cases.
 
 ## Configuration
 
@@ -78,7 +79,7 @@ If I were to implement a more sophisticated approach to the odometry fusion it w
 
 The `robot_localization` package provides a ROS service to set the initial pose, so I wrote a class that would subscribe to the initial GNSS odometry and call that service to provide an initial estimate to the ekf rather than have its initial pose be zero.
 
-Some time was spent attempting to tune the ekf, but no noticeable improvement was gained in the available time.
+Some time was spent reading about and attempting to tune the ekf, but no noticeable improvement was gained in the available time.
 
 However a comparision of the error from the ekf ![EKF error](short_localisation/graphs/default_ekf_error_with_initial_pose.png) to the naive approach ![Naive error](short_localisation/graphs/naive_approach_error.png) shows that the ekf gave a more accurate position estimate, but the naive approach gave a more accurate orientation estimate.
 
