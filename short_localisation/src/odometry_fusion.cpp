@@ -44,18 +44,18 @@ nav_msgs::Odometry OdometryFusion::encoderOdomChange() {
     double last_time{encoderChange.header.stamp.toSec()};
     double current_yaw{tf2::getYaw(encoderChange.pose.pose.orientation)};
 
-    for (auto encoder_odom = encoder_odom_deque_.cbegin();
-         encoder_odom != encoder_odom_deque_.cend(); ++encoder_odom) {
-      const double delta_t{encoder_odom->header.stamp.toSec() - last_time};
-      last_time = encoder_odom->header.stamp.toSec();
+    for (auto encoder_odom : encoder_odom_deque_) {
+      const double delta_t{encoder_odom.header.stamp.toSec() - last_time};
+      last_time = encoder_odom.header.stamp.toSec();
 
-      const double displacement{encoder_odom->twist.twist.linear.x * delta_t};
+      const double displacement{encoder_odom.twist.twist.linear.x * delta_t};
+      // polar to cartesian coordinates
       const double delta_x{displacement * cos(current_yaw)};
       const double delta_y{displacement * sin(current_yaw)};
       encoderChange.pose.pose.position.x += delta_x;
       encoderChange.pose.pose.position.y += delta_y;
 
-      const double delta_yaw{encoder_odom->twist.twist.angular.z * delta_t};
+      const double delta_yaw{encoder_odom.twist.twist.angular.z * delta_t};
       current_yaw += delta_yaw;
 
       //      std::cout << "Encoder step change: (" << delta_x << ", " <<

@@ -142,6 +142,10 @@ add_executable(error_recorder src/error_recorder.cpp src/csv_helper.cpp)
 add_dependencies(error_recorder ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(error_recorder ${catkin_LIBRARIES} )
 
+add_executable(ekf_initial_pose src/ekf_initial_pose.cpp)
+add_dependencies(ekf_initial_pose ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(ekf_initial_pose ${catkin_LIBRARIES} )
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use

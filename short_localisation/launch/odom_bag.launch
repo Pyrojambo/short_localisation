@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-    <node pkg="tf2_ros" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 1 map odom" />
+    <param name="use_sim_time" value="true"/>
+    <node pkg="rosbag" type="play" name="odom_rosbag" output="screen" args="--clock --pause $(find short_localisation)/data/data.bag"/>
 
-    <node pkg="rosbag" type="play" name="odom_rosbag" output="screen" args="--pause $(find short_localisation)/data/data.bag"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 1 map odom" />
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find short_localisation)/rviz/localisation.rviz" />
 </launch>
